@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-// add a log 
+// add a log before and after every method call in EmployeeService class
 @Aspect
 @Component
 public class EmployeeServiceAspect {

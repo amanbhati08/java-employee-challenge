@@ -25,6 +25,11 @@ public class EmployeeService implements IEmployeeService {
 	@Autowired
 	public WebClient webClient;
 
+	/**
+	 * Gets the all employee list.
+	 *
+	 * @return the all employee list
+	 */
 	@Override
 	public List<Employee> getAllEmployeeList() {
 		Mono<EmployeeListResponseDTO> employeeMono = webClient.get().uri(Constants.REST_API_URI_GET_ALL_EMPLOYEES)
@@ -32,6 +37,12 @@ public class EmployeeService implements IEmployeeService {
 		return employeeMono.block().getData();
 	}
 
+	/**
+	 * Gets the employee by id.
+	 *
+	 * @param id the id
+	 * @return the employee by id
+	 */
 	@Override
 	public Employee getEmployeeById(String id) {
 
@@ -41,6 +52,12 @@ public class EmployeeService implements IEmployeeService {
 		return employeeMono.block().getData();
 	}
 
+	/**
+	 * Gets the employee by name.
+	 *
+	 * @param searchString the search string
+	 * @return the employee by name
+	 */
 	@Override
 	public List<Employee> getEmployeeByName(String searchString) {
 
@@ -51,6 +68,11 @@ public class EmployeeService implements IEmployeeService {
 				.collect(Collectors.toList());
 	}
 
+	/**
+	 * Gets the highest salary of employee.
+	 *
+	 * @return the highest salary of employee
+	 */
 	@Override
 	public Integer getHighestSalaryOfEmployee() {
 
@@ -59,6 +81,11 @@ public class EmployeeService implements IEmployeeService {
 		return employeeList.stream().map(emp -> emp.getEmployeeSalary()).max(Comparator.naturalOrder()).get();
 	}
 
+	/**
+	 * Gets the top ten highest earning employee names.
+	 *
+	 * @return the top ten highest earning employee names
+	 */
 	@Override
 	public List<String> getTopTenHighestEarningEmployeeNames() {
 
@@ -67,6 +94,12 @@ public class EmployeeService implements IEmployeeService {
 		return employeeList.stream().sorted().map(emp -> emp.getEmployeeName()).limit(10).collect(Collectors.toList());
 	}
 
+	/**
+	 * Creates the employee.
+	 *
+	 * @param employeeInput the employee input
+	 * @return the employee
+	 */
 	@Override
 	public Employee createEmployee(Map<String, Object> employeeInput) {
 
@@ -78,6 +111,12 @@ public class EmployeeService implements IEmployeeService {
 		return employeeMono.getData();
 	}
 
+	/**
+	 * Delete employee by id.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	@Override
 	public String deleteEmployeeById(String id) {
 
